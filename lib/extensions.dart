@@ -20,7 +20,7 @@ extension StringExtension on String {
 }
 extension ContextExtension on BuildContext {
   Locale get systemLocale => Localizations.localeOf(this);
-  Locale get locale => MultilingualController.locale ?? View.of(this).platformDispatcher.locale;
+  Locale get locale => MultilingualController.locale;
   String get language => locale.toString();
   Locale get platformLocale {
     String languageCode = '';

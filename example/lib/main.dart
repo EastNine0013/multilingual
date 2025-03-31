@@ -3,7 +3,7 @@ import 'package:multilingual/extensions.dart';
 import 'package:multilingual/multilingual.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -19,9 +19,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Multilingual(
         languages: {
-          Locale('ko', 'KR'): {'lan': '한국어', 'text_button': '언어변경'},
-          Locale('en', 'US'): {'lan': 'English', 'text_button': 'Language change'},
-          Locale('ja', 'JP'): {'lan': '日本語', 'text_button': '言語変更'},
+          const Locale('ko', 'KR'): const {'lan': '한국어', 'text_button': '언어변경'},
+          const Locale('en', 'US'): const {'lan': 'English', 'text_button': 'Language change'},
+          const Locale('ja', 'JP'): const {'lan': '日本語', 'text_button': '言語変更'},
         },
         builder: (context) {
           return MaterialApp(

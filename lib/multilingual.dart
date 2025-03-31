@@ -50,18 +50,8 @@ class _MultilingualState extends State<Multilingual> {
 
     return MultilingualInherited(
       locale: MultilingualController.locale,
-      setLocale: _setLocale,
-      setLanguages: _setLanguages,
       child: widget.builder(context),
     );
-  }
-
-  _setLocale(Locale locale) {
-    print('aaaa');
-  }
-
-  _setLanguages(Map<String, dynamic> sentences) {
-    print('bbbb');
   }
 
   _controllerListener() {
@@ -91,7 +81,7 @@ class MultilingualController {
   ];
   static Iterable<LocalizationsDelegate<dynamic>> get localizationsDelegates => _localizationsDelegates;
 
-  static Map<Locale, Map<String, dynamic>> _languageList = {};
+  static final Map<Locale, Map<String, dynamic>> _languageList = {};
   static Map<Locale, Map<String, dynamic>> get languageList => _languageList;
 
   static _initController({

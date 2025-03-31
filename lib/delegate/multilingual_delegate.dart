@@ -14,8 +14,6 @@ class MultilingualDelegate extends LocalizationsDelegate<MultilingualInherited?>
   @override
   Future<MultilingualInherited?> load(Locale locale) async {
     MultilingualInherited? localizations = MultilingualInherited.of(context);
-    localizations?.setLocale(locale);
-    localizations?.setLanguages(languages[locale] ?? {});
     return localizations;
   }
 
