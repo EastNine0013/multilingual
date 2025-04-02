@@ -170,7 +170,7 @@ class MultilingualController {
     return value as T;
   }
 
-  String localeTrans({required Locale locale, required String key}) =>
+  static String localeTrans({required Locale locale, required String key}) =>
       trans(key, data: languageList[locale]);
 
   static setLocale(Locale locale) {
