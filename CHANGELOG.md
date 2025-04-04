@@ -20,3 +20,8 @@
 ## 1.1.3
 
 - Apply default language
+
+
+## 1.1.4
+
+- If there is no language to import, display it as the original key

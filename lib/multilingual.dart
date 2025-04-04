@@ -152,7 +152,7 @@ class MultilingualController {
       if (value is Map && value.containsKey(splitKey)) {
         value = value[splitKey];
       } else {
-        value = splitKey;
+        value = key;
         break;
       }
     }
