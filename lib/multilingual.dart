@@ -94,6 +94,11 @@ class MultilingualController {
     _supportedLocales = List.from(locales, growable: true);
     _locale = defaultLanguage ?? _supportedLocales.first;
 
+    Map<String, dynamic>? language = languages[_locale];
+    if (language != null) {
+      setLanguages(language);
+    }
+
     List<LocalizationsDelegate<dynamic>> delegateList = _localizationsDelegates.toList();
     delegateList.add(MultilingualDelegate(context, languages));
 

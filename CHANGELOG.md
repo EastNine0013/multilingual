@@ -15,3 +15,8 @@
 ## 1.1.2
 
 - Modify localeTrans to static
+
+
+## 1.1.3
+
+- Apply default language
