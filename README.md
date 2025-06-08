@@ -2,6 +2,10 @@
 
 `Multilingual` is a powerful Flutter localization plugin that simplifies managing multiple languages in your app. It allows dynamic text translation, runtime language switching, and text replacement.
 
+<a href="https://coff.ee/eastnine0013?ref=multilingual" target="_blank">
+      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" style="height: 45px; width: 162px;">
+</a>
+
 ## Features
 
 - **Dynamic Translation**: Use `.trans()` to easily translate text based on the current locale.
