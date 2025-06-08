@@ -18,11 +18,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Multilingual(
-        languages: {
-          const Locale('ko', 'KR'): const {'lan': '한국어', 'text_button': '언어변경'},
-          const Locale('en', 'US'): const {'lan': 'English', 'text_button': 'Language change'},
-          const Locale('ja', 'JP'): const {'lan': '日本語', 'text_button': '言語変更'},
-        },
+        languages: { },
         builder: (context) {
           return MaterialApp(
             localizationsDelegates: MultilingualController.localizationsDelegates,

@@ -91,8 +91,20 @@ class MultilingualController {
     Locale? defaultLanguage,
   }) {
     List<Locale> locales = languages.keys.toList();
+    Locale? tempLocale = defaultLanguage;
+    if (tempLocale == null && _supportedLocales.isNotEmpty) {
+      tempLocale = _supportedLocales.first;
+    }
+
+    if (tempLocale != null) {
+      _locale = tempLocale;
+    }
+
+    if (locales.isEmpty) {
+      locales.add(_locale);
+    }
+
     _supportedLocales = List.from(locales, growable: true);
-    _locale = defaultLanguage ?? _supportedLocales.first;
 
     Map<String, dynamic>? language = languages[_locale];
     if (language != null) {

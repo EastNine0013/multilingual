@@ -25,3 +25,8 @@
 ## 1.1.4
 
 - If there is no language to import, display it as the original key
+
+
+## 1.1.5
+
+- Fix issue where the app does not appear when locale is missing.
