@@ -148,7 +148,9 @@ class MultilingualController {
     required Map<String, dynamic> data,
   }) {
     _languageList[locale] = data;
-    _supportedLocales.add(locale);
+    if (!_supportedLocales.contains(locale)) {
+      _supportedLocales.add(locale);
+    }
   }
 
   static removeLanguage(Locale locale) {

@@ -10,7 +10,7 @@ class MultilingualInherited extends InheritedWidget {
   final Locale locale;
 
   @override
-  bool updateShouldNotify(MultilingualInherited oldWidget) => oldWidget.locale == locale;
+  bool updateShouldNotify(MultilingualInherited oldWidget) => oldWidget.locale != locale;
 
   static MultilingualInherited? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<MultilingualInherited>();
