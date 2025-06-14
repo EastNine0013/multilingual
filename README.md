@@ -16,62 +16,132 @@
 ## Usage
 
 ### Basic Setup
+#### Wrap your app with the `Multilingual` widget and define the supported languages.<br>Add `yourWidget` inside the `builder` of `MultilingualChild`.
 
-Wrap your app with the `Multilingual` widget and define the supported languages:
+##### Using Flutter's default `MaterialApp`:
 
 ```dart
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class DefaultApp extends StatefulWidget {
+  const DefaultApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<DefaultApp> createState() => _DefaultAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _DefaultAppState extends State<DefaultApp> {
 
   @override
   Widget build(BuildContext context) {
     return Multilingual(
-            languages: {
-              Locale('ko', 'KR'): {'lan': '한국어', 'text_button': '언어변경'},
-              Locale('en', 'US'): {'lan': 'English', 'text_button': 'Language change'},
-              Locale('ja', 'JP'): {'lan': '日本語', 'text_button': '言語変更'},
-            },
-            builder: (context) {
-              return MaterialApp(
-                localizationsDelegates: MultilingualController.localizationsDelegates,
-                supportedLocales: MultilingualController.supportedLocales,
-                locale: MultilingualController.locale,
-                home: Scaffold(
-                  appBar: AppBar(
-                    title: const Text('Plugin example app'),
-                  ),
-                  body: Center(
-                    child: Column(
-                      children: [
-                        Text('lan'.trans()),
-                        TextButton(onPressed: () {
-                          Locale? locale = MultilingualController.locale;
-                          Locale loc;
-                          if (locale.toString() == 'ko_KR') {
-                            loc = const Locale('en', 'US');
-                          } else if (locale.toString() == 'en_US') {
-                            loc = const Locale('ja', 'JP');
-                          } else {
-                            loc = const Locale('ko', 'KR');
-                          }
-                          MultilingualController.setLocale(loc);
-                        }, child: Text('text_button'.trans())),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }
+        languages: {
+          Locale('ko', 'KR'): {'lan': '한국어', 'text_button': '언어변경'},
+          Locale('en', 'US'): {'lan': 'English', 'text_button': 'Language change'},
+          Locale('ja', 'JP'): {'lan': '日本語', 'text_button': '言語変更'},
+        },
+        builder: (context) {
+          return MaterialApp(
+            localizationsDelegates: MultilingualController.localizationsDelegates,
+            supportedLocales: MultilingualController.supportedLocales,
+            locale: MultilingualController.locale,
+            home: MultilingualChild(
+              builder: (context) {
+                return HomeScreen();
+              }
+            ),
+          );
+        }
     );
   }
 }
 ```
+##### Using `MaterialApp.router` provided by `go_router`:
+```dart
+class RouterApp extends StatefulWidget {
+  const RouterApp({super.key});
+
+  @override
+  State<RouterApp> createState() => _RouterAppState();
+}
+
+class _RouterAppState extends State<RouterApp> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Multilingual(
+        languages: {
+          Locale('ko', 'KR'): {'lan': '한국어', 'text_button': '언어변경'},
+          Locale('en', 'US'): {'lan': 'English', 'text_button': 'Language change'},
+          Locale('ja', 'JP'): {'lan': '日本語', 'text_button': '言語変更'},
+        },
+        builder: (context) {
+          return MaterialApp.router(
+            routerConfig: _router,
+            localizationsDelegates: MultilingualController.localizationsDelegates,
+            supportedLocales: MultilingualController.supportedLocales,
+            locale: MultilingualController.locale,
+          );
+        }
+    );
+  }
+}
+
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => MultilingualChild(
+        builder: (context) => HomeScreen()
+      ),
+    ),
+  ],
+);
+```
+
+#### Your Widget:
+
+```dart
+class RouterApp extends StatefulWidget {
+  const RouterApp({super.key});
+
+  @override
+  State<RouterApp> createState() => _RouterAppState();
+}
+
+class _RouterAppState extends State<RouterApp> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Multilingual(
+        languages: {
+          Locale('ko', 'KR'): {'lan': '한국어', 'text_button': '언어변경'},
+          Locale('en', 'US'): {'lan': 'English', 'text_button': 'Language change'},
+          Locale('ja', 'JP'): {'lan': '日本語', 'text_button': '言語変更'},
+        },
+        builder: (context) {
+          return MaterialApp.router(
+            routerConfig: _router,
+            localizationsDelegates: MultilingualController.localizationsDelegates,
+            supportedLocales: MultilingualController.supportedLocales,
+            locale: MultilingualController.locale,
+          );
+        }
+    );
+  }
+}
+
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => MultilingualChild(
+        builder: (context) => HomeScreen()
+      ),
+    ),
+  ],
+);
+```
+
+<H4>Note: Do not use `const` with `yourWidget`. Using `const` will prevent the screen from updating.</H4><br>
 
 ### Creating Your App
 
@@ -83,9 +153,9 @@ Use `context.isTrans('key')` to check if a translation key exists:
 
 ```dart
 if (context.isTrans('key')) {
-  print('Translation key exists!');
+print('Translation key exists!');
 } else {
-  print('Translation key does not exist.');
+print('Translation key does not exist.');
 }
 ```
 
@@ -100,11 +170,11 @@ Text('Original text'.trans({'Original text': 'Replaced text'}));
 ## Example Output
 
 - Default Language: Korean (`ko_KR`)
-    - Button Text: `언어변경`
+  - Button Text: `언어변경`
 - Switch to English (`en_US`)
-    - Button Text: `Language change`
+  - Button Text: `Language change`
 - Switch to Japanese (`ja_JP`)
-    - Button Text: `言語変更`
+  - Button Text: `言語変更`
 
 ## Contributing
 
