@@ -30,3 +30,8 @@
 ## 1.1.5
 
 - Fix issue where the app does not appear when locale is missing.
+
+
+## 1.1.6
+
+- Support for go_router

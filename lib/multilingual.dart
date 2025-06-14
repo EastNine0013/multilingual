@@ -59,6 +59,18 @@ class _MultilingualState extends State<Multilingual> {
   }
 }
 
+class MultilingualChild extends StatelessWidget {
+  const MultilingualChild({super.key, required this.builder});
+
+  final MultilingualBuilder builder;
+
+  @override
+  Widget build(BuildContext context) => ValueListenableBuilder<Locale>(
+    valueListenable: MultilingualController._locale,
+    builder: (context, _, __) => builder(context)
+  );
+}
+
 class MultilingualController {
   MultilingualController ._();
 
@@ -71,8 +83,8 @@ class MultilingualController {
   static List<Locale> _supportedLocales = List.empty(growable: true);
   static List<Locale> get supportedLocales => _supportedLocales;
 
-  static Locale _locale = const Locale('en', 'US');
-  static Locale get locale => _locale;
+  static final ValueNotifier<Locale> _locale = ValueNotifier(const Locale('en', 'US'));
+  static Locale get locale => _locale.value;
 
   static Iterable<LocalizationsDelegate<dynamic>> _localizationsDelegates = const [
     GlobalMaterialLocalizations.delegate,
@@ -97,16 +109,16 @@ class MultilingualController {
     }
 
     if (tempLocale != null) {
-      _locale = tempLocale;
+      _locale.value = tempLocale;
     }
 
     if (locales.isEmpty) {
-      locales.add(_locale);
+      locales.add(locale);
     }
 
     _supportedLocales = List.from(locales, growable: true);
 
-    Map<String, dynamic>? language = languages[_locale];
+    Map<String, dynamic>? language = languages[locale];
     if (language != null) {
       setLanguages(language);
     }
@@ -193,7 +205,7 @@ class MultilingualController {
       trans(key, data: languageList[locale]);
 
   static setLocale(Locale locale) {
-    _locale = locale;
+    _locale.value = locale;
     _sentences = languageList[locale] ?? {};
     for (VoidCallback listener in _listeners) {
       listener.call();
