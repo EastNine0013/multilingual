@@ -35,3 +35,8 @@
 ## 1.1.6
 
 - Support for go_router
+
+
+## 1.1.7
+
+- Upgrade intl version
